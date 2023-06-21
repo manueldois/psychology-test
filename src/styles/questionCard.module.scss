@@ -1,0 +1,22 @@
+.questionCard {
+    h1 {
+        font-size: 3em;
+    }
+
+    h2 {
+        font-size: 2.5em;
+    }
+}
+
+.options {
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    grid-template-rows: repeat(2, 50%);
+    gap: 1em;
+
+    button {
+        font-size: 1.2em;
+        width: auto;
+        text-transform: unset;
+    }
+}
