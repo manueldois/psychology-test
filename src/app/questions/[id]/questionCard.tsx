@@ -1,25 +1,21 @@
 "use client";
 
 import classNames from "classnames";
-import { Question } from "@/types/questionarie";
-import styles from "@/styles/questionCard.module.scss";
-import useLocalStorage from "@/hooks/useLocalStorage";
+import { Question } from "@/app/types/questionarie";
+import styles from "./questionCard.module.scss";
 
 export default function QuestionCard({
   question: { id, question, options },
+  value,
+  onChange = () => {},
 }: {
   question: Question;
+  value?: string;
+  onChange?: (value: string) => void;
 }) {
-  const [answers, setAnswers] = useLocalStorage("answers", "");
-
-  const setValue = (v: string) => {
-    setAnswers((ans: Record<string, string>) => ({ ...ans, [id]: v }));
-  };
-
-  const value = answers[id];
-
   return (
     <article className={styles.questionCard}>
+      <small> ID {id} </small>
       <h2> {question} </h2>
       <section className={styles.options}>
         <label className={classNames("btn", { primary: value === "A" })}>
@@ -29,7 +25,7 @@ export default function QuestionCard({
             value={"A"}
             checked={value === "A"}
             name={`question-${id}`}
-            onChange={(e) => e.target.checked && setValue("A")}
+            onChange={(e) => e.target.checked && onChange("A")}
           />
         </label>
         <label className={classNames("btn", { primary: value === "B" })}>
@@ -39,7 +35,7 @@ export default function QuestionCard({
             value={"B"}
             checked={value === "B"}
             name={`question-${id}`}
-            onChange={(e) => e.target.checked && setValue("B")}
+            onChange={(e) => e.target.checked && onChange("B")}
           />
         </label>
         <label className={classNames("btn", { primary: value === "C" })}>
@@ -49,7 +45,7 @@ export default function QuestionCard({
             value={"C"}
             checked={value === "C"}
             name={`question-${id}`}
-            onChange={(e) => e.target.checked && setValue("C")}
+            onChange={(e) => e.target.checked && onChange("C")}
           />
         </label>
         <label className={classNames("btn", { primary: value === "D" })}>
@@ -59,7 +55,7 @@ export default function QuestionCard({
             value={"D"}
             checked={value === "D"}
             name={`question-${id}`}
-            onChange={(e) => e.target.checked && setValue("D")}
+            onChange={(e) => e.target.checked && onChange("D")}
           />
         </label>
       </section>

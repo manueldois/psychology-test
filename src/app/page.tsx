@@ -15,7 +15,7 @@ export default function Home() {
 
       <h2>
         <Link
-          href="/test"
+          href="/questions"
           className="btn primary"
           style={{ marginTop: "100px" }}
         >

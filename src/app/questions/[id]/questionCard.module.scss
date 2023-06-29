@@ -31,6 +31,11 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    display: flex;
+
+    b {
+      margin-right: 5px;
+    }
   }
 
   /* Hide the browser's default radio button */
