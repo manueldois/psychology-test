@@ -50,6 +50,7 @@ function PageClient({ question }: { question: Question }) {
   return (
     <>
       <br style={{ marginTop: 20 }} />
+      <h1> Question {step} / {path.length} </h1>
       <QuestionCard
         question={question}
         value={answer}
