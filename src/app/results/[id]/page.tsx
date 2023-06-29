@@ -1,7 +1,12 @@
-import { getResult } from "@/app/db";
+import { getAllResults, getResult } from "@/app/db";
 import Link from "next/link";
 
-export const dynamic = "error";
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const allResults = await getAllResults();
+  return allResults.map((r) => ({ id: r.id }));
+}
 
 async function Page({ params: { id } }: { params: { id: string } }) {
   const result = await getResult(id);

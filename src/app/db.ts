@@ -9,7 +9,6 @@ export const getQuestionIds = async () => {
     return questions.map(q => q.id)
 }
 
-
 export const getQuestion = async (id: string) => {
     await setTimeoutPromise(2000);
     return questions.find((q) => q.id === id);
@@ -18,4 +17,9 @@ export const getQuestion = async (id: string) => {
 export const getResult = async (id: string) => {
     await setTimeoutPromise(2000);
     return results.find((q) => q.id === id);
+};
+
+export const getAllResults = async () => {
+    await setTimeoutPromise(2000);
+    return results
 };
