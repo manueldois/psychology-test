@@ -10,9 +10,15 @@ async function Page({ params: { id } }: { params: { id: string } }) {
       <p> {result?.description1} </p>
       <p> {result?.description2} </p>
 
-      <Link href="/questions" className="btn primary" style={{ marginTop: "100px" }}>
-        Restart Test
-      </Link>
+      <section style={{ display: "flex", justifyContent: "center" }}>
+        <Link
+          href="/questions"
+          className="btn primary"
+          style={{ marginTop: "50px" }}
+        >
+          Restart Test
+        </Link>
+      </section>
     </>
   );
 }
