@@ -1,8 +1,7 @@
 "use client";
 
 import classNames from "classnames";
-import { useContext, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Question } from "@/app/types/questionarie";
 import QuestionCard from "./questionCard";
 import { useAnswersStore, usePathStore } from "@/store";
@@ -12,27 +11,28 @@ function PageClient({ question }: { question: Question }) {
 
   const { path } = usePathStore();
 
-  const { answers } = useAnswersStore();
+  const { getAnswer, setAnswer, answers } = useAnswersStore();
 
   const step = path.findIndex((id) => id == question.id);
 
-  const [answer, setAnswer] = useState<string | undefined>(answers[step]);
+  const answer = getAnswer(step);
 
   const onClickNext = () => {
-    answers[step] = answer!;
-
     const nextId = path[step + 1];
 
     router.push(`/questions/${nextId}`);
   };
 
-  const onClickSubmit = () => {
-    answers[step] = answer!;
+  const onClickSubmit = async () => {
+    const { resultId } = await fetch(`/results/calculate`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ path, answers }),
+    }).then((res) => res.json());
 
-    router.push(
-      `/results?path=${path.join(",")}&answers=${answers.join(",")}`,
-      {}
-    );
+    router.push(`/results/${resultId}`);
   };
 
   return (
@@ -44,7 +44,7 @@ function PageClient({ question }: { question: Question }) {
       <QuestionCard
         question={question}
         value={answer}
-        onChange={setAnswer}
+        onChange={(a) => setAnswer(step, a)}
       ></QuestionCard>
       <br style={{ marginTop: 20 }} />
       {path.length > 0 && (
