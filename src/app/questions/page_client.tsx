@@ -1,21 +1,17 @@
 "use client";
 
 import { useEffect } from "react";
-import { usePathname, useRouter } from "next/navigation";
-import { usePathStore } from "@/store";
+import { useRouter } from "next/navigation";
+import { useAnswersStore, usePathStore } from "@/store";
 
 export default async function PageClient({ path }: { path: string[] }) {
-  const pathname = usePathname();
   const router = useRouter();
-
-  console.count("Rerender");
 
   useEffect(() => {
     usePathStore.setState({ path });
+    useAnswersStore.setState({ answers: [] });
 
-    if (pathname === "/questions") {
-      router.push(`/questions/${path[0]}`);
-    }
+    router.push(`/questions/${path[0]}`);
   }, []);
 
   return <></>;
