@@ -1,21 +1,17 @@
 "use client";
 
 import classNames from "classnames";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Question } from "@/app/types/questionarie";
 import QuestionCard from "./questionCard";
+import { PathContext } from "../pathContext";
 
 function PageClient({ question }: { question: Question }) {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const path: string[] =
-    searchParams
-      .get("path")
-      ?.split(",")
-      .filter((id) => !!id)
-      .map((id) => id.trim()) ?? [];
+  const path: string[] = useContext(PathContext);
 
   const answers: string[] =
     searchParams
@@ -34,7 +30,7 @@ function PageClient({ question }: { question: Question }) {
     const nextId = path[step + 1];
 
     router.push(
-      `/questions/${nextId}?path=${path.join(",")}&answers=${answers.join(",")}`
+      `/questions/${nextId}?answers=${answers.join(",")}`
     );
   };
 
@@ -42,7 +38,7 @@ function PageClient({ question }: { question: Question }) {
     answers[step] = answer!;
 
     router.push(
-      `/results?path=${path.join(",")}&answers=${answers.join(",")}`,
+      `/results?&answers=${answers.join(",")}`,
       {}
     );
   };
@@ -50,7 +46,10 @@ function PageClient({ question }: { question: Question }) {
   return (
     <>
       <br style={{ marginTop: 20 }} />
-      <h1> Question {step} / {path.length} </h1>
+      <h1>
+        {" "}
+        Question {step} / {path.length}{" "}
+      </h1>
       <QuestionCard
         question={question}
         value={answer}
