@@ -1,24 +1,22 @@
 "use client";
 
 import { useEffect } from "react";
-import { PathContext } from "./pathContext";
 import { usePathname, useRouter } from "next/navigation";
+import { usePathStore } from "@/store";
 
-export default async function Providers({
-  children,
-  path,
-}: {
-  children: React.ReactNode;
-  path: string[];
-}) {
+export default async function PageClient({ path }: { path: string[] }) {
   const pathname = usePathname();
   const router = useRouter();
 
+  console.count("Rerender");
+
   useEffect(() => {
+    usePathStore.setState({ path });
+
     if (pathname === "/questions") {
       router.push(`/questions/${path[0]}`);
     }
   }, []);
 
-  return <PathContext.Provider value={path}>{children}</PathContext.Provider>;
+  return <></>;
 }
