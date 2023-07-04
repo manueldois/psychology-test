@@ -12,7 +12,8 @@ async function Page({ params: { id } }: { params: { id: string } }) {
   const result = await getResult(id);
   return (
     <>
-      <h1> {result?.title} </h1>
+      <h1>Result:</h1>
+      <h2 style={{textDecoration: 'underline'}}> {result?.title} </h2>
       <small> ID {result?.id} </small>
       <p> {result?.description1} </p>
       <p> {result?.description2} </p>
