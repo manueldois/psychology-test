@@ -18,12 +18,16 @@ function PageClient({ question }: { question: Question }) {
   const answer = getAnswer(step);
 
   const onClickNext = () => {
+    if (!answer) return;
+
     const nextId = path[step + 1];
 
     router.push(`/questions/${nextId}`);
   };
 
   const onClickSubmit = async () => {
+    if (!answer) return;
+
     const { resultId } = await fetch(`/results/calculate`, {
       method: "POST",
       headers: {
