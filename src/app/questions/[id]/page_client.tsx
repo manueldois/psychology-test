@@ -43,7 +43,11 @@ function PageClient({ question }: { question: Question }) {
     <>
       <br style={{ marginTop: 20 }} />
       <h1>
-        Question {step + 1} / {path.length}
+        Question{" "}
+        <span style={{ whiteSpace: "nowrap" }}>
+          {" "}
+          {step + 1} / {path.length}{" "}
+        </span>
       </h1>
       <QuestionCard
         question={question}
