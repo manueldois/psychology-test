@@ -1,47 +1,46 @@
-.options {
-  display: grid;
-  grid-template-columns: repeat(2, 50%);
-  grid-template-rows: repeat(2, 50%);
-  gap: 1em;
-  margin-top: 50px;
+.questionCard {
+  .options {
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    grid-template-rows: repeat(2, 50%);
+    gap: 1em;
+    margin-top: 50px;
 
-  div {
-    font-size: 1.2em;
-    width: auto;
-    text-transform: unset;
+    label {
+      display: block;
+      position: relative;
+      padding-left: 35px;
+      margin-bottom: 12px;
+      text-transform: unset;
+      cursor: pointer;
+      margin: 0;
+      font-size: 22px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      display: flex;
+      width: 100%;
 
-    &.checked {
-      color: "red";
+      b {
+        margin-right: 5px;
+      }
+    }
+
+    /* Hide the browser's default radio button */
+    label input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
     }
   }
 }
 
-.questionCard {
-  /* The label */
-  label {
-    display: block;
-    position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
-    text-transform: unset;
-    cursor: pointer;
-    margin: 0;
-    font-size: 22px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    display: flex;
-
-    b {
-      margin-right: 5px;
+@media only screen and (max-width: 600px) {
+  .questionCard {
+    .options {
+      grid-template-columns: repeat(1, 100%);
+      grid-template-rows: repeat(2, 50%);
     }
-  }
-
-  /* Hide the browser's default radio button */
-  label input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
   }
 }
