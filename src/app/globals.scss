@@ -66,7 +66,7 @@ button,
   padding: 1em 1.5em;
   border: none;
   width: fit-content;
-  color: whitesmoke;
+  color: rgb(var(--foreground-rgb));
   text-transform: uppercase;
 
   &.primary {
@@ -80,21 +80,22 @@ button,
       background-color: rgb(0, 68, 131);
       transform: scale(0.97);
       transition: linear 0.1s;
-      color: white;
+      color: rgb(var(--foreground-rgb));
       cursor: pointer;
     }
   }
 
-  .disabled, &:disabled {
+  .disabled,
+  &:disabled {
     background-color: rgb(46, 51, 56);
-    color: white;
+    color: rgb(var(--foreground-rgb));
 
     &:hover,
     &.checked {
       background-color: rgb(67, 73, 80);
       transform: scale(0.97);
       transition: linear 0.1s;
-      color: white;
+      color: rgb(var(--foreground-rgb));
       cursor: pointer;
     }
   }
